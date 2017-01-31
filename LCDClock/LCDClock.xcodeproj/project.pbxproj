@@ -17,6 +17,7 @@
 		09F08F931E38058E0077DB40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09F08F911E38058E0077DB40 /* Main.storyboard */; };
 		09F08F951E38058E0077DB40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F08F941E38058E0077DB40 /* Assets.xcassets */; };
 		09F08F981E38058E0077DB40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09F08F961E38058E0077DB40 /* LaunchScreen.storyboard */; };
+		AA33938D1E412B23001E894F /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA33938C1E412B23001E894F /* OptionsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,8 @@
 		09F08F941E38058E0077DB40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09F08F971E38058E0077DB40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09F08F991E38058E0077DB40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA33938B1E412B23001E894F /* OptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsViewController.h; sourceTree = "<group>"; };
+		AA33938C1E412B23001E894F /* OptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +76,8 @@
 				09F08F8E1E38058E0077DB40 /* ViewController.h */,
 				09F08F8F1E38058E0077DB40 /* ViewController.m */,
 				09F08F911E38058E0077DB40 /* Main.storyboard */,
+				AA33938B1E412B23001E894F /* OptionsViewController.h */,
+				AA33938C1E412B23001E894F /* OptionsViewController.m */,
 				09DEE48A1E393F4E00C5F645 /* digit.xib */,
 				09DEE48C1E393FBF00C5F645 /* digit.h */,
 				09DEE48D1E393FBF00C5F645 /* digit.m */,
@@ -174,6 +179,7 @@
 				09F08F8D1E38058E0077DB40 /* AppDelegate.m in Sources */,
 				09F08F8A1E38058E0077DB40 /* main.m in Sources */,
 				09DEE48E1E393FBF00C5F645 /* digit.m in Sources */,
+				AA33938D1E412B23001E894F /* OptionsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

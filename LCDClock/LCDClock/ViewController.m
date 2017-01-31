@@ -53,6 +53,10 @@
     [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(hideOptions) userInfo:nil repeats:false];
 }
 
+- (IBAction)optionsSelected:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"optionsSelected" sender:self];
+}
+
 - (void)hideOptions {
     [self.options setHidden:true];
 }
@@ -67,10 +71,5 @@
         self.backgroundImageIndex = 9;
     else if (self.backgroundImageIndex == 10)
         self.backgroundImageIndex = 0;
-}
-
-- (IBAction)selectOptions:(UITapGestureRecognizer *)sender {
-    if (self.options.isHidden == false)
-        [self performSegueWithIdentifier:@"optionsSelected" sender:self];
 }
 @end

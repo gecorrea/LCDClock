@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -113,25 +113,22 @@
                                     <constraint firstItem="Oe9-eu-SfJ" firstAttribute="width" secondItem="f5f-8q-10p" secondAttribute="width" id="r1A-28-m6v"/>
                                 </constraints>
                             </stackView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Settings-50" translatesAutoresizingMaskIntoConstraints="NO" id="gNd-jt-10U">
-                                <rect key="frame" x="617" y="20" width="50" height="50"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="gNd-jt-10U" secondAttribute="height" multiplier="1:1" id="5Sy-l4-IaI"/>
-                                </constraints>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="380-WK-aEW">
+                                <rect key="frame" x="597" y="20" width="50" height="50"/>
+                                <state key="normal" image="Settings-50"/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="YcV-4P-mUV" appends="YES" id="NGy-j8-J2T"/>
+                                    <action selector="optionsSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vf8-ZT-DcJ"/>
                                 </connections>
-                            </imageView>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="380-WK-aEW" firstAttribute="top" secondItem="l8I-OB-Ajo" secondAttribute="bottom" id="6t9-jY-YoS"/>
+                            <constraint firstItem="380-WK-aEW" firstAttribute="trailing" secondItem="hSE-c0-ELW" secondAttribute="trailingMargin" id="7sb-OB-hAs"/>
                             <constraint firstItem="Tq4-Yb-lSi" firstAttribute="leading" secondItem="hSE-c0-ELW" secondAttribute="leading" constant="5" id="Ztx-pt-e6k"/>
                             <constraint firstAttribute="trailing" secondItem="Tq4-Yb-lSi" secondAttribute="trailing" constant="5" id="f8b-45-bt5"/>
                             <constraint firstItem="Tq4-Yb-lSi" firstAttribute="centerY" secondItem="hSE-c0-ELW" secondAttribute="centerY" id="fM5-8C-t1G"/>
-                            <constraint firstAttribute="trailing" secondItem="gNd-jt-10U" secondAttribute="trailing" id="j6W-Xj-Wen"/>
-                            <constraint firstItem="gNd-jt-10U" firstAttribute="top" secondItem="l8I-OB-Ajo" secondAttribute="bottom" id="kT7-ES-7AL"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="OWe-WC-EmG" appends="YES" id="x2G-wb-LU7"/>
@@ -140,19 +137,22 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="amPm" destination="raa-wq-8ai" id="F38-3u-BaF"/>
                         <outlet property="bottomDot" destination="wx4-gt-GYO" id="MPP-9T-OKW"/>
+                        <outlet property="clockView" destination="Tq4-Yb-lSi" id="SGR-P9-tYQ"/>
                         <outlet property="dotView" destination="LR0-r2-GE2" id="0ag-Me-JOX"/>
-                        <outlet property="options" destination="gNd-jt-10U" id="WmJ-7I-PuS"/>
+                        <outlet property="firstHourDigit" destination="ZnO-f0-0ta" id="Kgd-hI-PlX"/>
+                        <outlet property="firstMinuteDigit" destination="wmn-CL-0WT" id="Gnf-Bs-BJt"/>
+                        <outlet property="firstSecondDigit" destination="CkW-H1-Mas" id="E0p-st-63K"/>
+                        <outlet property="options" destination="380-WK-aEW" id="I5z-Kk-po4"/>
+                        <outlet property="secondHourDigit" destination="EO1-4T-sKA" id="MC9-Z3-zXT"/>
+                        <outlet property="secondMinuteDigit" destination="8a8-bV-AMv" id="bK4-WS-YhZ"/>
+                        <outlet property="secondSecondDigit" destination="ceh-0o-H1v" id="Hqr-qO-o9k"/>
                         <outlet property="topDot" destination="M6H-Bu-9Za" id="zFh-Qu-VeD"/>
-                        <segue destination="AOa-gU-Ypj" kind="show" identifier="optionsSelected" id="ySe-rY-X6J"/>
+                        <segue destination="AOa-gU-Ypj" kind="show" identifier="optionsSelected" id="jyD-8b-jfd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="OWe-WC-EmG">
-                    <connections>
-                        <action selector="showOptions:" destination="BYZ-38-t0r" id="Ipb-dy-pfn"/>
-                    </connections>
-                </tapGestureRecognizer>
                 <swipeGestureRecognizer direction="right" id="JSh-Lf-eEh">
                     <connections>
                         <action selector="changeBackground:" destination="BYZ-38-t0r" id="fAe-gZ-UIZ"/>
@@ -163,18 +163,18 @@
                         <action selector="changeBackground:" destination="BYZ-38-t0r" id="BQP-dF-sDB"/>
                     </connections>
                 </swipeGestureRecognizer>
-                <tapGestureRecognizer id="YcV-4P-mUV">
+                <tapGestureRecognizer id="OWe-WC-EmG">
                     <connections>
-                        <action selector="selectOptions:" destination="BYZ-38-t0r" id="e8X-PG-kAC"/>
+                        <action selector="showOptions:" destination="BYZ-38-t0r" id="Ipb-dy-pfn"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="31.934032983508249" y="36"/>
+            <point key="canvasLocation" x="32" y="-82"/>
         </scene>
-        <!--View Controller-->
+        <!--Options View Controller-->
         <scene sceneID="NJl-ia-LKW">
             <objects>
-                <viewController id="AOa-gU-Ypj" sceneMemberID="viewController">
+                <viewController id="AOa-gU-Ypj" customClass="OptionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lFI-LV-PCM"/>
                         <viewControllerLayoutGuide type="bottom" id="hqD-ml-Jyn"/>
@@ -183,90 +183,115 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DONE" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d77-NZ-6hO">
-                                <rect key="frame" x="558" y="20" width="89" height="34.5"/>
-                                <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="30"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oDU-kG-gaw">
+                                <rect key="frame" x="573" y="20" width="74" height="41"/>
+                                <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="25"/>
+                                <state key="normal" title="DONE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneSelected:" destination="AOa-gU-Ypj" eventType="touchUpInside" id="TkB-JT-HzM"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clock Color" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACf-l1-LgK">
-                                <rect key="frame" x="20" y="97.5" width="144.5" height="23"/>
+                                <rect key="frame" x="20" y="97.5" width="98.5" height="23"/>
                                 <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Zone" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLQ-hr-W0H">
-                                <rect key="frame" x="414.5" y="97.5" width="91" height="23"/>
+                                <rect key="frame" x="368.5" y="97.5" width="91" height="23"/>
                                 <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="mTX-Y1-ZRe">
-                                <rect key="frame" x="20" y="128" width="270" height="67.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="mTX-Y1-ZRe">
+                                <rect key="frame" x="20" y="128" width="126" height="31.5"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4a-Uq-hUT">
-                                        <rect key="frame" x="0.0" y="0.0" width="64" height="67.5"/>
-                                        <color key="backgroundColor" red="0.027450980392156862" green="0.96078431372549022" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRO-od-7V3">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="31.5"/>
+                                        <color key="backgroundColor" red="0.0" green="0.97805660959999996" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
+                                                <integer key="value" value="15"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n4k-yh-bOJ">
-                                        <rect key="frame" x="69" y="0.0" width="63.5" height="67.5"/>
-                                        <color key="backgroundColor" red="0.99607843137254903" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="lightGreenSelected:" destination="AOa-gU-Ypj" eventType="touchUpInside" id="eCv-uV-sS7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mnh-hI-cJR">
+                                        <rect key="frame" x="32" y="0.0" width="30" height="31.5"/>
+                                        <color key="backgroundColor" red="0.99936085939407349" green="0.14975595474243164" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
+                                                <integer key="value" value="15"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8yb-s9-Tws">
-                                        <rect key="frame" x="137.5" y="0.0" width="64" height="67.5"/>
-                                        <color key="backgroundColor" red="0.2627450980392157" green="0.49411764705882355" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="redSelected:" destination="AOa-gU-Ypj" eventType="touchUpInside" id="x0P-wP-WXd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8K0-jU-WwN">
+                                        <rect key="frame" x="64" y="0.0" width="30" height="31.5"/>
+                                        <color key="backgroundColor" red="0.26274509800000001" green="0.4941176471" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
+                                                <integer key="value" value="15"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ope-yU-Rl5">
-                                        <rect key="frame" x="206.5" y="0.0" width="63.5" height="67.5"/>
-                                        <color key="backgroundColor" red="0.20784313725490194" green="0.60784313725490191" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="blueSelected:" destination="AOa-gU-Ypj" eventType="touchUpInside" id="fgT-6d-T8r"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r31-y8-hbC">
+                                        <rect key="frame" x="96" y="0.0" width="30" height="31.5"/>
+                                        <color key="backgroundColor" red="0.20784313730000001" green="0.60784313729999995" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
+                                                <integer key="value" value="15"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                    </view>
+                                        <connections>
+                                            <action selector="darkGreenSelected:" destination="AOa-gU-Ypj" eventType="touchUpInside" id="zd7-zu-cjp"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="mTX-Y1-ZRe" secondAttribute="height" multiplier="4:1" id="Pzv-S1-xD0"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eastern Standard Time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxk-Sc-w7t">
-                                <rect key="frame" x="414" y="128" width="189.5" height="23"/>
-                                <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkT-m8-I6p">
+                                <rect key="frame" x="368" y="128" width="228" height="40"/>
+                                <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="24"/>
+                                <state key="normal" title="Eastern Standard Time">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ACf-l1-LgK" firstAttribute="leading" secondItem="drr-T9-4Gv" secondAttribute="leadingMargin" id="2c1-3P-9ek"/>
-                            <constraint firstItem="zLQ-hr-W0H" firstAttribute="top" secondItem="d77-NZ-6hO" secondAttribute="bottom" constant="42.5" id="5S3-LD-Zmd"/>
+                            <constraint firstItem="kkT-m8-I6p" firstAttribute="top" secondItem="zLQ-hr-W0H" secondAttribute="bottom" constant="7.5" id="9ur-ip-nYq"/>
                             <constraint firstItem="mTX-Y1-ZRe" firstAttribute="top" secondItem="ACf-l1-LgK" secondAttribute="bottom" constant="7.5" id="BdC-mQ-AKX"/>
-                            <constraint firstItem="ACf-l1-LgK" firstAttribute="top" secondItem="d77-NZ-6hO" secondAttribute="bottom" constant="42.5" id="FMi-ew-1U1"/>
-                            <constraint firstItem="Lxk-Sc-w7t" firstAttribute="top" secondItem="zLQ-hr-W0H" secondAttribute="bottom" constant="7.5" id="KMw-JK-yHY"/>
+                            <constraint firstItem="zLQ-hr-W0H" firstAttribute="top" secondItem="oDU-kG-gaw" secondAttribute="bottom" constant="36.5" id="CJ4-wO-o0j"/>
                             <constraint firstItem="mTX-Y1-ZRe" firstAttribute="leading" secondItem="drr-T9-4Gv" secondAttribute="leadingMargin" id="Qtx-Bi-Ii6"/>
-                            <constraint firstItem="Lxk-Sc-w7t" firstAttribute="leading" secondItem="mTX-Y1-ZRe" secondAttribute="trailing" constant="124" id="jjc-id-uYJ"/>
+                            <constraint firstItem="oDU-kG-gaw" firstAttribute="top" secondItem="lFI-LV-PCM" secondAttribute="bottom" id="Vn0-22-nfJ"/>
+                            <constraint firstItem="ACf-l1-LgK" firstAttribute="top" secondItem="oDU-kG-gaw" secondAttribute="bottom" constant="36.5" id="ain-60-Cy7"/>
+                            <constraint firstItem="kkT-m8-I6p" firstAttribute="leading" secondItem="zLQ-hr-W0H" secondAttribute="leading" id="dVg-Cu-kai"/>
+                            <constraint firstItem="oDU-kG-gaw" firstAttribute="trailing" secondItem="drr-T9-4Gv" secondAttribute="trailingMargin" id="gmh-uf-Ytf"/>
                             <constraint firstItem="zLQ-hr-W0H" firstAttribute="leading" secondItem="ACf-l1-LgK" secondAttribute="trailing" constant="250" id="lu1-95-MHI"/>
-                            <constraint firstItem="d77-NZ-6hO" firstAttribute="trailing" secondItem="drr-T9-4Gv" secondAttribute="trailingMargin" id="mIu-sK-Nht"/>
-                            <constraint firstItem="Lxk-Sc-w7t" firstAttribute="leading" secondItem="ACf-l1-LgK" secondAttribute="trailing" constant="249.5" id="vz1-t7-TlL"/>
-                            <constraint firstItem="d77-NZ-6hO" firstAttribute="top" secondItem="lFI-LV-PCM" secondAttribute="bottom" id="zEB-5a-3S5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="blue" destination="8K0-jU-WwN" id="uiA-lw-Dkc"/>
+                        <outlet property="darkGreen" destination="r31-y8-hbC" id="djL-TO-rlD"/>
+                        <outlet property="doneButton" destination="oDU-kG-gaw" id="jDd-VJ-lNt"/>
+                        <outlet property="lightGreen" destination="fRO-od-7V3" id="iC9-gM-KLm"/>
+                        <outlet property="red" destination="Mnh-hI-cJR" id="ZJT-JB-L17"/>
+                        <outlet property="timeZoneButton" destination="kkT-m8-I6p" id="TQB-Ac-raa"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="updateOptions" id="sge-wQ-2dl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XJx-Y2-bFb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
