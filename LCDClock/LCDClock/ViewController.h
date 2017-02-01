@@ -11,8 +11,9 @@
 @property (weak, nonatomic) IBOutlet UIView *topDot;
 @property (weak, nonatomic) IBOutlet UIView *bottomDot;
 @property NSMutableArray *backgroundPictures;
-@property UIImage *backgroudImage;
+@property UIImage *backgroundImage;
 @property int backgroundImageIndex;
+@property UIDeviceOrientation currentDeviceOrienation;
 @property (weak, nonatomic) IBOutlet UIButton *options;
 @property (weak, nonatomic) IBOutlet digit *firstHourDigit;
 @property (weak, nonatomic) IBOutlet digit *secondHourDigit;

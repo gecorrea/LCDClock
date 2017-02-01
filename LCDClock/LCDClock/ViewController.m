@@ -10,8 +10,25 @@
 @implementation ViewController
 
 - (void) viewDidLoad {
-    [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [super viewDidLoad];
+    [self loadBackgroundImages];
+    NSUserDefaults *currentBackground = [NSUserDefaults standardUserDefaults];
+    self.backgroundImageIndex = [[currentBackground objectForKey:@"lastBackground"] intValue];
+    [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(updateView) userInfo:nil repeats:true];
+    [self runClock];
+}
+
+- (void) runClock {
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(blinkSeparator) userInfo:nil repeats:true];
+    NSDate *currentTime = [[NSDate alloc] init];
+    NSLog(@"%@", [NSDateFormatter localizedStringFromDate:currentTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterMediumStyle]);
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"EEEE"];
+    NSLog(@"%@", [dateFormatter stringFromDate:[NSDate date]]);
+}
+
+- (void) loadBackgroundImages {
     UIImage *image1 = [UIImage imageNamed:@"img-clock-background-1"];
     UIImage *image2 = [UIImage imageNamed:@"img-clock-background-2"];
     UIImage *image3 = [UIImage imageNamed:@"img-clock-background-3"];
@@ -22,25 +39,101 @@
     UIImage *image8 = [UIImage imageNamed:@"img-clock-background-8"];
     UIImage *image9 = [UIImage imageNamed:@"img-clock-background-9"];
     UIImage *image10 = [UIImage imageNamed:@"img-clock-background-10"];
-    self.backgroundImageIndex = 0;
-    self.backgroundPictures = [[NSMutableArray alloc] initWithObjects:image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, nil];
     
-    [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(updateView) userInfo:nil repeats:true];
-    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(blinkSeparator) userInfo:nil repeats:true];
+    self.backgroundPictures = [[NSMutableArray alloc] initWithObjects:image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, nil];
 }
 
+//- (void) deviceDidRotate:(NSNotification *)notification {
+//    self.currentDeviceOrienation = [[UIDevice currentDevice] orientation];
+//    [self updateView];
+//}
+
 - (void) updateView {
-    self.topDot.layer.cornerRadius = self.topDot.bounds.size.width/2;
-    self.bottomDot.layer.cornerRadius = self.bottomDot.bounds.size.width/2;
+    NSArray *dotViews = [[NSArray alloc] initWithObjects:self.topDot, self.bottomDot, nil];
+    for (UIView *view in dotViews) {
+        view.layer.cornerRadius = view.bounds.size.width/2;
+    }
+    // set the user selected color from options for the digits
+    NSUserDefaults *savedOptions = [NSUserDefaults standardUserDefaults];
+    int color = [[savedOptions objectForKey:@"colorSelected"] intValue];
+    switch (color) {
+        case 1:
+            for (UIView *view in dotViews) {
+                [view setBackgroundColor:[self colorWithHexString:@"07F53E"]];
+            }
+            break;
+            
+        case 2:
+            for (UIView *view in dotViews) {
+                [view setBackgroundColor:[self colorWithHexString:@"FE0000"]];
+            }
+            break;
+            
+        case 3:
+            for (UIView *view in dotViews) {
+                [view setBackgroundColor:[self colorWithHexString:@"437EF3"]];
+            }
+            break;
+            
+        case 4:
+            for (UIView *view in dotViews) {
+                [view setBackgroundColor:[self colorWithHexString:@"359B5D"]];
+            }
+            break;
+            
+        default:
+            for (UIView *view in dotViews) {
+                [view setBackgroundColor:[self colorWithHexString:@"000000"]];
+            }
+            break;
+    }
     [self backgroundView];
+}
+
+-(UIColor *) colorWithHexString:(NSString *) hex {
+    NSString *cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    
+    // String should be 6 or 8 characters
+    if ([cString length] < 6) return [UIColor grayColor];
+    
+    // strip 0X if it appears
+    if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
+    
+    if ([cString length] != 6) return  [UIColor grayColor];
+    
+    // Separate into r, g, b substrings
+    NSRange range;
+    range.location = 0;
+    range.length = 2;
+    NSString *rString = [cString substringWithRange:range];
+    
+    range.location = 2;
+    NSString *gString = [cString substringWithRange:range];
+    
+    range.location = 4;
+    NSString *bString = [cString substringWithRange:range];
+    
+    // Scan values
+    unsigned int r, g, b;
+    [[NSScanner scannerWithString:rString] scanHexInt:&r];
+    [[NSScanner scannerWithString:gString] scanHexInt:&g];
+    [[NSScanner scannerWithString:bString] scanHexInt:&b];
+    
+    return [UIColor colorWithRed:((float) r / 255.0f)
+                           green:((float) g / 255.0f)
+                            blue:((float) b / 255.0f)
+                           alpha:1.0f];
 }
 
 - (void) backgroundView {
     UIGraphicsBeginImageContext(self.view.frame.size);
     [self.backgroundPictures[self.backgroundImageIndex] drawInRect:self.view.bounds];
-    self.backgroudImage = UIGraphicsGetImageFromCurrentImageContext();
+    self.backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    self.view.backgroundColor = [UIColor colorWithPatternImage:self.backgroudImage];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:self.backgroundImage];
+    NSUserDefaults *currentBackground = [NSUserDefaults standardUserDefaults];
+    NSNumber *lastBackgoundIndex = [NSNumber numberWithInt:self.backgroundImageIndex];
+    [currentBackground setObject:lastBackgoundIndex forKey:@"lastBackground"];
 }
 
 - (void) blinkSeparator {
@@ -72,4 +165,5 @@
     else if (self.backgroundImageIndex == 10)
         self.backgroundImageIndex = 0;
 }
+
 @end

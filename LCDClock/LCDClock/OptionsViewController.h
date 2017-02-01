@@ -11,5 +11,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *blue;
 @property (weak, nonatomic) IBOutlet UIButton *darkGreen;
 @property (weak, nonatomic) IBOutlet UIButton *timeZoneButton;
+@property NSNumber *clockColor;
 
 @end
