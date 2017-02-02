@@ -18,4 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomLeftMSegment;
 @property (weak, nonatomic) IBOutlet UIView *bottomRightMSegment;
 
+- (void) makeLetters:(NSString *) lettersToMake;
+
 @end

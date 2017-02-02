@@ -27,8 +27,8 @@
     }
     
     // set the user selected color from options for the digits
-    NSUserDefaults *savedOptions = [NSUserDefaults standardUserDefaults];
-    int color = [[savedOptions objectForKey:@"colorSelected"] intValue];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    int color = [[defaults objectForKey:@"colorSelected"] intValue];
     switch (color) {
         case 1:
             for (UIView *view in clockViews) {
@@ -97,8 +97,7 @@
                            alpha:1.0f];
 }
 
-- (void) makeDigits:(NSString *) convertDigit {
-    int digitToMake = [convertDigit intValue];
+- (void) makeDigit:(int) digitToMake {
     
     switch (digitToMake) {
         case 0:
@@ -118,7 +117,7 @@
             [self.middleSegment setHidden:true];
             [self.bottomLeftSegment setHidden:true];
             [self.bottomRightSegment setHidden:false];
-            [self.bottomSegment setHidden:false];
+            [self.bottomSegment setHidden:true];
             break;
             
         case 2:
@@ -202,6 +201,13 @@
             break;
             
         default:
+            [self.topSegment setHidden:true];
+            [self.topLeftSegment setHidden:true];
+            [self.topRightSegment setHidden:true];
+            [self.middleSegment setHidden:true];
+            [self.bottomLeftSegment setHidden:true];
+            [self.bottomRightSegment setHidden:true];
+            [self.bottomSegment setHidden:true];
             break;
     }
 }

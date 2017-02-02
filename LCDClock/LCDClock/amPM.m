@@ -26,8 +26,8 @@
     }
     
     // set the user selected color from options for the digits
-    NSUserDefaults *savedOptions = [NSUserDefaults standardUserDefaults];
-    int color = [[savedOptions objectForKey:@"colorSelected"] intValue];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    int color = [[defaults objectForKey:@"colorSelected"] intValue];
     switch (color) {
         case 1:
             for (UIView *view in amPMViews) {
@@ -94,6 +94,16 @@
                            green:((float) g / 255.0f)
                             blue:((float) b / 255.0f)
                            alpha:1.0f];
+}
+
+- (void) makeLetters:(NSString *) lettersToMake {
+    if ([lettersToMake isEqualToString:@"AM"]) {
+        [self.bottomRightASegment setHidden:false];
+    }
+    else {
+        [self.bottomRightASegment setHidden:true];
+    }
+
 }
 
 @end

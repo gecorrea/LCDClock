@@ -13,19 +13,49 @@
     // Do any additional setup after loading the view, typically from a nib.
     [super viewDidLoad];
     [self loadBackgroundImages];
-    NSUserDefaults *currentBackground = [NSUserDefaults standardUserDefaults];
-    self.backgroundImageIndex = [[currentBackground objectForKey:@"lastBackground"] intValue];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.backgroundImageIndex = [[defaults objectForKey:@"lastBackground"] intValue];
     [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(updateView) userInfo:nil repeats:true];
-    [self runClock];
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(blinkSeparator) userInfo:nil repeats:true];
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runClock) userInfo:nil repeats:true];
 }
 
 - (void) runClock {
-    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(blinkSeparator) userInfo:nil repeats:true];
-    NSDate *currentTime = [[NSDate alloc] init];
-    NSLog(@"%@", [NSDateFormatter localizedStringFromDate:currentTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterMediumStyle]);
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"EEEE"];
-    NSLog(@"%@", [dateFormatter stringFromDate:[NSDate date]]);
+    [dateFormatter setDateFormat:@"hhmmss"];
+//    [dateFormatter setDateFormat:@"EEEE"];
+//    [dateFormatter stringFromDate:[NSDate date]];
+//    NSLog(@"%@", [dateFormatter stringFromDate:[NSDate date]]);
+    NSString *time = [dateFormatter stringFromDate:[NSDate date]];
+    int convertTime = [time intValue];
+//    NSLog(@"%d", convertTime);
+    int currentDigit = (convertTime - (convertTime % 100000))/100000;
+
+    if (currentDigit == 0)
+        currentDigit = 10;
+    [self.firstHourDigit makeDigit:currentDigit];
+    if (currentDigit != 10) {
+        convertTime = convertTime - 100000;
+    }
+    currentDigit = (convertTime - (convertTime % 10000))/10000;
+    [self.secondHourDigit makeDigit:currentDigit];
+    convertTime = convertTime - (currentDigit * 10000);
+    currentDigit = (convertTime - (convertTime % 1000))/1000;
+    [self.firstMinuteDigit makeDigit:currentDigit];
+    convertTime = convertTime - (currentDigit * 1000);
+    currentDigit = (convertTime - (convertTime % 100))/100;
+    [self.secondMinuteDigit makeDigit:currentDigit];
+    convertTime = (convertTime - (currentDigit * 100));
+    currentDigit = (convertTime - (convertTime % 10))/10;
+    [self.firstSecondDigit makeDigit:currentDigit];
+    convertTime = (convertTime - (currentDigit * 10));
+    currentDigit = convertTime;
+    [self.secondSecondDigit makeDigit:currentDigit];
+    
+    [dateFormatter setDateFormat:@"a"];
+    NSString *timeLetters = [dateFormatter stringFromDate:[NSDate date]];
+    [self.amPm makeLetters:timeLetters];
+    
 }
 
 - (void) loadBackgroundImages {
@@ -54,8 +84,8 @@
         view.layer.cornerRadius = view.bounds.size.width/2;
     }
     // set the user selected color from options for the digits
-    NSUserDefaults *savedOptions = [NSUserDefaults standardUserDefaults];
-    int color = [[savedOptions objectForKey:@"colorSelected"] intValue];
+    NSUserDefaults *defualts = [NSUserDefaults standardUserDefaults];
+    int color = [[defualts objectForKey:@"colorSelected"] intValue];
     switch (color) {
         case 1:
             for (UIView *view in dotViews) {

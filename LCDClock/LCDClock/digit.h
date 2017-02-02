@@ -13,4 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomRightSegment;
 @property (weak, nonatomic) IBOutlet UIView *bottomSegment;
 
+- (void) makeDigit:(int) digitToMake;
+
 @end
