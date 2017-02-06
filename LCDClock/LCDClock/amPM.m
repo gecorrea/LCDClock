@@ -20,13 +20,21 @@
     // take all the UIViews and make them into an array
     NSArray *amPMViews = [[NSArray alloc] initWithObjects:self.topASegment, self.topLeftASegment, self.topRightASegment, self.middleASegment, self.bottomLeftASegment, self.bottomRightASegment, self.topMSegment, self.topLeftMSegment, self.topRightMSegment, self.topMiddleMSegment, self.bottomLeftMSegment, self.bottomRightMSegment, nil];
     
+    // if clock is in 24 hour format, hide all segments
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    int clockFormat = [[defaults objectForKey:@"formatSelected"] intValue];
+    if (clockFormat == 1) {
+        for (UIView *view in amPMViews) {
+            [view setHidden:true];
+        }
+    }
+    
     // use for in loop to traverse the array and make the corners triangular
     for (UIView *view in amPMViews) {
         view.layer.cornerRadius = self.bounds.size.width/8;
     }
     
     // set the user selected color from options for the digits
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     int color = [[defaults objectForKey:@"colorSelected"] intValue];
     switch (color) {
         case 1:

@@ -12,50 +12,16 @@
 - (void) viewDidLoad {
     // Do any additional setup after loading the view, typically from a nib.
     [super viewDidLoad];
+
     [self loadBackgroundImages];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.backgroundImageIndex = [[defaults objectForKey:@"lastBackground"] intValue];
-    [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(updateView) userInfo:nil repeats:true];
+    [self backgroundView];
+
+    [self loadSeparator];
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(blinkSeparator) userInfo:nil repeats:true];
+    
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runClock) userInfo:nil repeats:true];
-}
-
-- (void) runClock {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"hhmmss"];
-//    [dateFormatter setDateFormat:@"EEEE"];
-//    [dateFormatter stringFromDate:[NSDate date]];
-//    NSLog(@"%@", [dateFormatter stringFromDate:[NSDate date]]);
-    NSString *time = [dateFormatter stringFromDate:[NSDate date]];
-    int convertTime = [time intValue];
-//    NSLog(@"%d", convertTime);
-    int currentDigit = (convertTime - (convertTime % 100000))/100000;
-
-    if (currentDigit == 0)
-        currentDigit = 10;
-    [self.firstHourDigit makeDigit:currentDigit];
-    if (currentDigit != 10) {
-        convertTime = convertTime - 100000;
-    }
-    currentDigit = (convertTime - (convertTime % 10000))/10000;
-    [self.secondHourDigit makeDigit:currentDigit];
-    convertTime = convertTime - (currentDigit * 10000);
-    currentDigit = (convertTime - (convertTime % 1000))/1000;
-    [self.firstMinuteDigit makeDigit:currentDigit];
-    convertTime = convertTime - (currentDigit * 1000);
-    currentDigit = (convertTime - (convertTime % 100))/100;
-    [self.secondMinuteDigit makeDigit:currentDigit];
-    convertTime = (convertTime - (currentDigit * 100));
-    currentDigit = (convertTime - (convertTime % 10))/10;
-    [self.firstSecondDigit makeDigit:currentDigit];
-    convertTime = (convertTime - (currentDigit * 10));
-    currentDigit = convertTime;
-    [self.secondSecondDigit makeDigit:currentDigit];
-    
-    [dateFormatter setDateFormat:@"a"];
-    NSString *timeLetters = [dateFormatter stringFromDate:[NSDate date]];
-    [self.amPm makeLetters:timeLetters];
-    
 }
 
 - (void) loadBackgroundImages {
@@ -73,12 +39,37 @@
     self.backgroundPictures = [[NSMutableArray alloc] initWithObjects:image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, nil];
 }
 
-//- (void) deviceDidRotate:(NSNotification *)notification {
-//    self.currentDeviceOrienation = [[UIDevice currentDevice] orientation];
-//    [self updateView];
-//}
+- (void) backgroundView {
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    [self.backgroundPictures[self.backgroundImageIndex] drawInRect:self.view.bounds];
+    self.backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.view.backgroundColor = [UIColor colorWithPatternImage:self.backgroundImage];
+    NSUserDefaults *currentBackground = [NSUserDefaults standardUserDefaults];
+    NSNumber *lastBackgoundIndex = [NSNumber numberWithInt:self.backgroundImageIndex];
+    [currentBackground setObject:lastBackgoundIndex forKey:@"lastBackground"];
+}
 
-- (void) updateView {
+- (IBAction)changeBackground:(UISwipeGestureRecognizer *)sender {
+    if(sender.direction == UISwipeGestureRecognizerDirectionLeft)
+        self.backgroundImageIndex += 1;
+    else if(sender.direction == UISwipeGestureRecognizerDirectionRight)
+        self.backgroundImageIndex -= 1;
+    
+    if (self.backgroundImageIndex == -1)
+        self.backgroundImageIndex = 9;
+    else if (self.backgroundImageIndex == 10)
+        self.backgroundImageIndex = 0;
+    
+    [self backgroundView];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    [self backgroundView];
+    [self loadSeparator];
+}
+
+- (void) loadSeparator {
     NSArray *dotViews = [[NSArray alloc] initWithObjects:self.topDot, self.bottomDot, nil];
     for (UIView *view in dotViews) {
         view.layer.cornerRadius = view.bounds.size.width/2;
@@ -117,7 +108,55 @@
             }
             break;
     }
-    [self backgroundView];
+}
+
+- (void) blinkSeparator {
+    self.topDot.hidden = !self.topDot.hidden;
+    self.bottomDot.hidden = !self.bottomDot.hidden;
+}
+
+- (void) runClock {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    int clockFormat = [[defaults objectForKey:@"formatSelected"] intValue];
+    if (clockFormat == 0) {
+        [dateFormatter setDateFormat:@"a"];
+        NSString *timeLetters = [dateFormatter stringFromDate:[NSDate date]];
+        [self.amPm makeLetters:timeLetters];
+        [dateFormatter setDateFormat:@"hhmmss"];
+    }
+    else {
+        [dateFormatter setDateFormat:@"HHmmss"];
+    }
+    
+    NSString *time = [dateFormatter stringFromDate:[NSDate date]];
+    int convertTime = [time intValue];
+    
+    int currentDigit = (convertTime - (convertTime % 100000))/100000;
+    
+    if (currentDigit == 0)
+        currentDigit = 10;
+    [self.firstHourDigit makeDigit:currentDigit];
+    if (currentDigit != 10) {
+        convertTime = convertTime - 100000;
+    }
+    currentDigit = (convertTime - (convertTime % 10000))/10000;
+    [self.secondHourDigit makeDigit:currentDigit];
+    convertTime = convertTime - (currentDigit * 10000);
+    currentDigit = (convertTime - (convertTime % 1000))/1000;
+    [self.firstMinuteDigit makeDigit:currentDigit];
+    convertTime = convertTime - (currentDigit * 1000);
+    currentDigit = (convertTime - (convertTime % 100))/100;
+    [self.secondMinuteDigit makeDigit:currentDigit];
+    convertTime = (convertTime - (currentDigit * 100));
+    currentDigit = (convertTime - (convertTime % 10))/10;
+    [self.firstSecondDigit makeDigit:currentDigit];
+    convertTime = (convertTime - (currentDigit * 10));
+    currentDigit = convertTime;
+    [self.secondSecondDigit makeDigit:currentDigit];
+    
+    
 }
 
 -(UIColor *) colorWithHexString:(NSString *) hex {
@@ -155,45 +194,17 @@
                            alpha:1.0f];
 }
 
-- (void) backgroundView {
-    UIGraphicsBeginImageContext(self.view.frame.size);
-    [self.backgroundPictures[self.backgroundImageIndex] drawInRect:self.view.bounds];
-    self.backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    self.view.backgroundColor = [UIColor colorWithPatternImage:self.backgroundImage];
-    NSUserDefaults *currentBackground = [NSUserDefaults standardUserDefaults];
-    NSNumber *lastBackgoundIndex = [NSNumber numberWithInt:self.backgroundImageIndex];
-    [currentBackground setObject:lastBackgoundIndex forKey:@"lastBackground"];
-}
-
-- (void) blinkSeparator {
-    self.topDot.hidden = !self.topDot.hidden;
-    self.bottomDot.hidden = !self.bottomDot.hidden;
-}
-
 - (IBAction)showOptions:(UITapGestureRecognizer *)sender {
     [self.options setHidden:false];
     [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(hideOptions) userInfo:nil repeats:false];
-}
-
-- (IBAction)optionsSelected:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"optionsSelected" sender:self];
 }
 
 - (void)hideOptions {
     [self.options setHidden:true];
 }
 
-- (IBAction)changeBackground:(UISwipeGestureRecognizer *)sender {
-    if(sender.direction == UISwipeGestureRecognizerDirectionLeft)
-        self.backgroundImageIndex += 1;
-    else if(sender.direction == UISwipeGestureRecognizerDirectionRight)
-        self.backgroundImageIndex -= 1;
-    
-    if (self.backgroundImageIndex == -1)
-        self.backgroundImageIndex = 9;
-    else if (self.backgroundImageIndex == 10)
-        self.backgroundImageIndex = 0;
+- (IBAction)optionsSelected:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"optionsSelected" sender:self];
 }
 
 @end

@@ -11,23 +11,26 @@
 
 
 - (void) viewDidLoad {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *color = [defaults objectForKey:@"colorSelected"];
-    if ([color isEqual:@"1"])
-        [self.lightGreen setSelected:true];
-    else if([color isEqual:@"2"])
-        [self.red setSelected:true];
-    else if ([color isEqual:@"3"])
-        [self.blue setSelected:true];
-    else if ([color isEqual:@"4"])
-        [self.darkGreen setSelected:true];
-    [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(updateView) userInfo:nil repeats:true];
-}
-
-- (void) updateView {
     NSArray *colorbuttons = [[NSArray alloc] initWithObjects:self.lightGreen, self.red, self.blue, self.darkGreen, nil];
     for (UIButton *button in colorbuttons) {
         button.layer.cornerRadius = button.bounds.size.width/2;
+    }
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *color = [defaults objectForKey:@"colorSelected"];
+    if ([color isEqual:@1])
+        [self.lightGreen setSelected:true];
+    else if([color isEqual:@2])
+        [self.red setSelected:true];
+    else if ([color isEqual:@3])
+        [self.blue setSelected:true];
+    else if ([color isEqual:@4])
+        [self.darkGreen setSelected:true];
+    
+    NSNumber *format = [defaults objectForKey:@"formatSelected"];
+    if ([format isEqual:@1]) {
+        [self.clockFormatSwitch setOn:YES animated:YES];
+        
+        self.timeZones = [NSArray ]
     }
 }
 
@@ -68,10 +71,20 @@
     [self.blue setSelected:false];
 }
 
+- (IBAction)changeFormat:(UISwitch *)sender {
+    if ([self.clockFormatSwitch isOn]) {
+        self.clockFormat = @1; // 24 hour format
+    }
+    else {
+        self.clockFormat = @0; // 12 hour format
+    }
+}
+
+
 - (void) saveOptions {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:self.clockColor forKey:@"colorSelected"];
-    
+    [defaults setObject:self.clockFormat forKey:@"formatSelected"];
 }
 
 @end
