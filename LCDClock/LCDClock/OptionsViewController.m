@@ -29,9 +29,13 @@
     NSNumber *format = [defaults objectForKey:@"formatSelected"];
     if ([format isEqual:@1]) {
         [self.clockFormatSwitch setOn:YES animated:YES];
-        
-        self.timeZones = [NSArray ]
     }
+    
+    self.timeZones = [[NSArray alloc] initWithObjects:@"Eastern Standard Time", @"Central Standard Time", @"Mountain Standard Time", @"Pacific Standard Time", @"Alaska Standard Time", @"Hawaii-Aleutian Standard Time", nil];
+    
+    self.timeZonePicker.delegate = self;
+    self.timeZonePicker.dataSource = self;
+    [self.timeZonePicker setShowsSelectionIndicator:YES];
 }
 
 - (IBAction)doneSelected:(id)sender {
@@ -80,6 +84,39 @@
     }
 }
 
+
+- (IBAction)changeTimeZone:(UIButton *)sender {
+    [self.timeZonePicker setHidden:false];
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSString *strTitle = self.timeZones[row];
+    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:strTitle attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    return attString;
+    
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)thePickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)thePickerView numberOfRowsInComponent:(NSInteger)component {
+    return [self.timeZones count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [self.timeZones objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    //Here, like the table view you can get the each section of each row if you've multiple sections
+    NSLog(@"Selected Time Zone: %@.", self.timeZones[row]);
+    [self.timeZoneButton setTitle:self.timeZones[row] forState:UIControlStateNormal];
+    [self.timeZonePicker setHidden:true];
+}
 
 - (void) saveOptions {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

@@ -155,8 +155,6 @@
     convertTime = (convertTime - (currentDigit * 10));
     currentDigit = convertTime;
     [self.secondSecondDigit makeDigit:currentDigit];
-    
-    
 }
 
 -(UIColor *) colorWithHexString:(NSString *) hex {
