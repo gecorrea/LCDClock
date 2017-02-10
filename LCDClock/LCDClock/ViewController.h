@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet digit *secondSecondDigit;
 @property (weak, nonatomic) IBOutlet amPM *amPm;
 @property (weak, nonatomic) IBOutlet UIStackView *clockView;
+@property (weak, nonatomic) IBOutlet UILabel *date;
 
 
 - (IBAction)showOptions:(UITapGestureRecognizer *)sender;

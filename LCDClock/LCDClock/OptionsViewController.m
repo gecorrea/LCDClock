@@ -31,7 +31,9 @@
         [self.clockFormatSwitch setOn:YES animated:YES];
     }
     
-    self.timeZones = [[NSArray alloc] initWithObjects:@"Eastern Standard Time", @"Central Standard Time", @"Mountain Standard Time", @"Pacific Standard Time", @"Alaska Standard Time", @"Hawaii-Aleutian Standard Time", nil];
+    [self.timeZoneButton setTitle:[defaults objectForKey:@"timeZoneSelected"] forState:UIControlStateNormal];
+    
+    self.timeZones = [[NSArray alloc] initWithObjects:@"EST", @"CST", @"MST", @"PST", @"AST", @"HST", nil];
     
     self.timeZonePicker.delegate = self;
     self.timeZonePicker.dataSource = self;
@@ -89,13 +91,11 @@
     [self.timeZonePicker setHidden:false];
 }
 
-- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSString *strTitle = self.timeZones[row];
     NSAttributedString *attString = [[NSAttributedString alloc] initWithString:strTitle attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     return attString;
-    
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)thePickerView {
@@ -111,9 +111,6 @@
 }
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    
-    //Here, like the table view you can get the each section of each row if you've multiple sections
-    NSLog(@"Selected Time Zone: %@.", self.timeZones[row]);
     [self.timeZoneButton setTitle:self.timeZones[row] forState:UIControlStateNormal];
     [self.timeZonePicker setHidden:true];
 }
@@ -122,6 +119,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:self.clockColor forKey:@"colorSelected"];
     [defaults setObject:self.clockFormat forKey:@"formatSelected"];
+    [defaults setObject:self.timeZoneButton.currentTitle forKey:@"timeZoneSelected"];
 }
 
 @end

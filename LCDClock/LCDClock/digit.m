@@ -101,113 +101,113 @@
     
     switch (digitToMake) {
         case 0:
-            [self.topSegment setHidden:false];
-            [self.topLeftSegment setHidden:false];
-            [self.topRightSegment setHidden:false];
-            [self.middleSegment setHidden:true];
-            [self.bottomLeftSegment setHidden:false];
-            [self.bottomRightSegment setHidden:false];
-            [self.bottomSegment setHidden:false];
+            [self.topSegment setAlpha:1.0];
+            [self.topLeftSegment setAlpha:1.0];
+            [self.topRightSegment setAlpha:1.0];
+            [self.middleSegment setAlpha:0.2];
+            [self.bottomLeftSegment setAlpha:1.0];
+            [self.bottomRightSegment setAlpha:1.0];
+            [self.bottomSegment setAlpha:1.0];
             break;
             
         case 1:
-            [self.topSegment setHidden:true];
-            [self.topLeftSegment setHidden:true];
-            [self.topRightSegment setHidden:false];
-            [self.middleSegment setHidden:true];
-            [self.bottomLeftSegment setHidden:true];
-            [self.bottomRightSegment setHidden:false];
-            [self.bottomSegment setHidden:true];
+            [self.topSegment setAlpha:0.1];
+            [self.topLeftSegment setAlpha:0.2];
+            [self.topRightSegment setAlpha:1.0];
+            [self.middleSegment setAlpha:0.2];
+            [self.bottomLeftSegment setAlpha:0.1];
+            [self.bottomRightSegment setAlpha:1.0];
+            [self.bottomSegment setAlpha:0.1];
             break;
             
         case 2:
-            [self.topSegment setHidden:false];
-            [self.topLeftSegment setHidden:true];
-            [self.topRightSegment setHidden:false];
-            [self.middleSegment setHidden:false];
-            [self.bottomLeftSegment setHidden:false];
-            [self.bottomRightSegment setHidden:true];
-            [self.bottomSegment setHidden:false];
+            [self.topSegment setAlpha:1.0];
+            [self.topLeftSegment setAlpha:0.2];
+            [self.topRightSegment setAlpha:1.0];
+            [self.middleSegment setAlpha:1.0];
+            [self.bottomLeftSegment setAlpha:1.0];
+            [self.bottomRightSegment setAlpha:0.2];
+            [self.bottomSegment setAlpha:1.0];
             break;
             
         case 3:
-            [self.topSegment setHidden:false];
-            [self.topLeftSegment setHidden:true];
-            [self.topRightSegment setHidden:false];
-            [self.middleSegment setHidden:false];
-            [self.bottomLeftSegment setHidden:true];
-            [self.bottomRightSegment setHidden:false];
-            [self.bottomSegment setHidden:false];
+            [self.topSegment setAlpha:1.0];
+            [self.topLeftSegment setAlpha:0.2];
+            [self.topRightSegment setAlpha:1.0];
+            [self.middleSegment setAlpha:1.0];
+            [self.bottomLeftSegment setAlpha:0.2];
+            [self.bottomRightSegment setAlpha:1.0];
+            [self.bottomSegment setAlpha:1.0];
             break;
             
         case 4:
-            [self.topSegment setHidden:true];
-            [self.topLeftSegment setHidden:false];
-            [self.topRightSegment setHidden:false];
-            [self.middleSegment setHidden:false];
-            [self.bottomLeftSegment setHidden:true];
-            [self.bottomRightSegment setHidden:false];
-            [self.bottomSegment setHidden:true];
+            [self.topSegment setAlpha:0.2];
+            [self.topLeftSegment setAlpha:1.0];
+            [self.topRightSegment setAlpha:1.0];
+            [self.middleSegment setAlpha:1.0];
+            [self.bottomLeftSegment setAlpha:0.2];
+            [self.bottomRightSegment setAlpha:1.0];
+            [self.bottomSegment setAlpha:0.2];
             break;
             
         case 5:
-            [self.topSegment setHidden:false];
-            [self.topLeftSegment setHidden:false];
-            [self.topRightSegment setHidden:true];
-            [self.middleSegment setHidden:false];
-            [self.bottomLeftSegment setHidden:true];
-            [self.bottomRightSegment setHidden:false];
-            [self.bottomSegment setHidden:false];
+            [self.topSegment setAlpha:1.0];
+            [self.topLeftSegment setAlpha:1.0];
+            [self.topRightSegment setAlpha:0.2];
+            [self.middleSegment setAlpha:1.0];
+            [self.bottomLeftSegment setAlpha:0.2];
+            [self.bottomRightSegment setAlpha:1.0];
+            [self.bottomSegment setAlpha:1.0];
             break;
             
         case 6:
-            [self.topSegment setHidden:false];
-            [self.topLeftSegment setHidden:false];
-            [self.topRightSegment setHidden:true];
-            [self.middleSegment setHidden:false];
-            [self.bottomLeftSegment setHidden:false];
-            [self.bottomRightSegment setHidden:false];
-            [self.bottomSegment setHidden:false];
+            [self.topSegment setAlpha:1.0];
+            [self.topLeftSegment setAlpha:1.0];
+            [self.topRightSegment setAlpha:0.2];
+            [self.middleSegment setAlpha:1.0];
+            [self.bottomLeftSegment setAlpha:1.0];
+            [self.bottomRightSegment setAlpha:1.0];
+            [self.bottomSegment setAlpha:1.0];
             break;
             
         case 7:
-            [self.topSegment setHidden:false];
-            [self.topLeftSegment setHidden:true];
-            [self.topRightSegment setHidden:false];
-            [self.middleSegment setHidden:true];
-            [self.bottomLeftSegment setHidden:true];
-            [self.bottomRightSegment setHidden:false];
-            [self.bottomSegment setHidden:true];
+            [self.topSegment setAlpha:1.0];
+            [self.topLeftSegment setAlpha:0.2];
+            [self.topRightSegment setAlpha:1.0];
+            [self.middleSegment setAlpha:0.2];
+            [self.bottomLeftSegment setAlpha:0.2];
+            [self.bottomRightSegment setAlpha:1.0];
+            [self.bottomSegment setAlpha:0.2];
             break;
             
         case 8:
-            [self.topSegment setHidden:false];
-            [self.topLeftSegment setHidden:false];
-            [self.topRightSegment setHidden:false];
-            [self.middleSegment setHidden:false];
-            [self.bottomLeftSegment setHidden:false];
-            [self.bottomRightSegment setHidden:false];
-            [self.bottomSegment setHidden:false];
+            [self.topSegment setAlpha:1.0];
+            [self.topLeftSegment setAlpha:1.0];
+            [self.topRightSegment setAlpha:1.0];
+            [self.middleSegment setAlpha:1.0];
+            [self.bottomLeftSegment setAlpha:1.0];
+            [self.bottomRightSegment setAlpha:1.0];
+            [self.bottomSegment setAlpha:1.0];
             break;
             
         case 9:
-            [self.topSegment setHidden:false];
-            [self.topLeftSegment setHidden:false];
-            [self.topRightSegment setHidden:false];
-            [self.middleSegment setHidden:false];
-            [self.bottomLeftSegment setHidden:true];
-            [self.bottomRightSegment setHidden:false];
-            [self.bottomSegment setHidden:true];
+            [self.topSegment setAlpha:1.0];
+            [self.topLeftSegment setAlpha:1.0];
+            [self.topRightSegment setAlpha:1.0];
+            [self.middleSegment setAlpha:1.0];
+            [self.bottomLeftSegment setAlpha:0.2];
+            [self.bottomRightSegment setAlpha:1.0];
+            [self.bottomSegment setAlpha:0.2];
             break;
             
         default:
-            [self.topSegment setHidden:true];
-            [self.topLeftSegment setHidden:true];
-            [self.topRightSegment setHidden:true];
-            [self.middleSegment setHidden:true];
-            [self.bottomLeftSegment setHidden:true];
-            [self.bottomRightSegment setHidden:true];
-            [self.bottomSegment setHidden:true];
+            [self.topSegment setAlpha:0.2];
+            [self.topLeftSegment setAlpha:0.2];
+            [self.topRightSegment setAlpha:0.2];
+            [self.middleSegment setAlpha:0.2];
+            [self.bottomLeftSegment setAlpha:0.2];
+            [self.bottomRightSegment setAlpha:0.2];
+            [self.bottomSegment setAlpha:0.2];
             break;
     }
 }

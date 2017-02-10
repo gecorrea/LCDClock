@@ -12,6 +12,13 @@
 - (void) viewDidLoad {
     // Do any additional setup after loading the view, typically from a nib.
     [super viewDidLoad];
+    
+    [self.date setFont:[UIFont fontWithName:@"digital-7" size:20]];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"EEEE MMMM d"];
+//    [self.date setText:[formatter stringFromDate:[NSDate date]]];
+    self.date.text =[formatter stringFromDate:[NSDate date]];
+    
 
     [self loadBackgroundImages];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -21,6 +28,7 @@
     [self loadSeparator];
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(blinkSeparator) userInfo:nil repeats:true];
     
+    [NSTimeZone setDefaultTimeZone:[NSTimeZone timeZoneWithAbbreviation:[defaults objectForKey:@"timeZoneSelected"]]];
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runClock) userInfo:nil repeats:true];
 }
 
@@ -74,6 +82,7 @@
     for (UIView *view in dotViews) {
         view.layer.cornerRadius = view.bounds.size.width/2;
     }
+
     // set the user selected color from options for the digits
     NSUserDefaults *defualts = [NSUserDefaults standardUserDefaults];
     int color = [[defualts objectForKey:@"colorSelected"] intValue];
@@ -108,6 +117,7 @@
             }
             break;
     }
+    self.date.textColor = self.topDot.backgroundColor;
 }
 
 - (void) blinkSeparator {

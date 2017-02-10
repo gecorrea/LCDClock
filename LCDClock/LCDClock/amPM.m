@@ -106,10 +106,10 @@
 
 - (void) makeLetters:(NSString *) lettersToMake {
     if ([lettersToMake isEqualToString:@"AM"]) {
-        [self.bottomRightASegment setHidden:false];
+        [self.bottomRightASegment setAlpha:1.0];
     }
     else {
-        [self.bottomRightASegment setHidden:true];
+        [self.bottomRightASegment setAlpha:0.2];
     }
 
 }
