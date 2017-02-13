@@ -4,6 +4,7 @@
 #import <UIKit/UIKit.h>
 #import "digit.h"
 #import "amPM.h"
+#import "Utilities.h"
 
 @interface ViewController : UIViewController
 @property UIView *digitView;

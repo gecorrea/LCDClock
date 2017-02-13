@@ -28,7 +28,8 @@
     [self loadSeparator];
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(blinkSeparator) userInfo:nil repeats:true];
     
-    [NSTimeZone setDefaultTimeZone:[NSTimeZone timeZoneWithAbbreviation:[defaults objectForKey:@"timeZoneSelected"]]];
+//    [NSTimeZone setDefaultTimeZone:[NSTimeZone timeZoneWithAbbreviation:[defaults objectForKey:@"timeZoneSelected"]]];
+    [NSTimeZone setDefaultTimeZone:[NSTimeZone timeZoneWithAbbreviation:[Utilities getPlistDictionaryObjectForKey:@"timeZone"]]];
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runClock) userInfo:nil repeats:true];
 }
 
@@ -130,6 +131,7 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     int clockFormat = [[defaults objectForKey:@"formatSelected"] intValue];
+//    int clockFormat = [[Utilities getPlistDictionaryObjectForKey:@"clockFormat"] intValue];
     if (clockFormat == 0) {
         [dateFormatter setDateFormat:@"a"];
         NSString *timeLetters = [dateFormatter stringFromDate:[NSDate date]];

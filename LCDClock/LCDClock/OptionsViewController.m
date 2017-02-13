@@ -17,6 +17,7 @@
     }
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *color = [defaults objectForKey:@"colorSelected"];
+//    NSNumber *color = [Utilities getPlistDictionaryObjectForKey:@"clockColor"];
     if ([color isEqual:@1])
         [self.lightGreen setSelected:true];
     else if([color isEqual:@2])
@@ -27,12 +28,18 @@
         [self.darkGreen setSelected:true];
     
     NSNumber *format = [defaults objectForKey:@"formatSelected"];
+//    NSNumber *format = [Utilities getPlistDictionaryObjectForKey:@"clockFormat"];
     if ([format isEqual:@1]) {
         [self.clockFormatSwitch setOn:YES animated:YES];
     }
     
-    [self.timeZoneButton setTitle:[defaults objectForKey:@"timeZoneSelected"] forState:UIControlStateNormal];
-    
+//    [self.timeZoneButton setTitle:[defaults objectForKey:@"timeZoneSelected"] forState:UIControlStateNormal];
+    if ([Utilities getPlistDictionaryObjectForKey:@"timeZone"] == nil){
+        [self.timeZoneButton setTitle:@"EST" forState:UIControlStateNormal];
+    }
+    else {
+        [self.timeZoneButton setTitle:[Utilities getPlistDictionaryObjectForKey:@"timeZone"] forState:UIControlStateNormal];
+    }
     self.timeZones = [[NSArray alloc] initWithObjects:@"EST", @"CST", @"MST", @"PST", @"AST", @"HST", nil];
     
     self.timeZonePicker.delegate = self;
@@ -117,9 +124,12 @@
 
 - (void) saveOptions {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:self.clockColor forKey:@"colorSelected"];
     [defaults setObject:self.clockFormat forKey:@"formatSelected"];
-    [defaults setObject:self.timeZoneButton.currentTitle forKey:@"timeZoneSelected"];
+//    [Utilities writeToPlistDictionary:self.clockFormat forKey:@"clockFormat"];
+    [defaults setObject:self.clockColor forKey:@"colorSelected"];
+//    [Utilities writeToPlistDictionary:self.clockColor forKey:@"clockColor"];
+//    [defaults setObject:self.timeZoneButton.currentTitle forKey:@"timeZoneSelected"];
+    [Utilities writeToPlistDictionary:self.timeZoneButton.currentTitle forKey:@"timeZone"];
 }
 
 @end

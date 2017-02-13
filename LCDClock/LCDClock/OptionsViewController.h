@@ -3,6 +3,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
+#import "Utilities.h"
 
 @interface OptionsViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
@@ -16,5 +17,12 @@
 @property NSNumber *clockFormat;
 @property (weak, nonatomic) IBOutlet UIPickerView *timeZonePicker;
 @property NSArray *timeZones;
+
+
+// for userSettings.plist
+@property NSMutableArray *formatArray;
+@property NSMutableArray *colorArray;
+@property NSMutableArray *timeZoneArray;
+@property NSMutableDictionary *plistDict;
 
 @end
